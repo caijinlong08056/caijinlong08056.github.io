@@ -1,4 +1,4 @@
-var posts=["2024/11/21/这是另一篇新的博文2024-11-21/","2024/11/24/伊索寓言之关于狐狸思维导图/","2024/11/24/过年/","2024/11/23/啄木鸟开店/","2024/11/23/小雪/"];function toRandomPost(){
+var posts=["2024/11/21/这是另一篇新的博文2024-11-21/","2024/11/25/Docker镜像转存到阿里云私有仓库/","2024/11/24/伊索寓言之关于狐狸思维导图/","2024/11/24/过年/","2024/11/23/啄木鸟开店/","2024/11/23/小雪/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };var friend_link_list=[];
     var refreshNum = 1;

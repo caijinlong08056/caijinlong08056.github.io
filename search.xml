@@ -5,8 +5,8 @@
     
     <entry>
       <title>Docker镜像转存到阿里云私有仓库</title>
-      <link href="/2024/11/25/Docker%E9%95%9C%E5%83%8F%E8%BD%AC%E5%AD%98%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
-      <url>/2024/11/25/Docker%E9%95%9C%E5%83%8F%E8%BD%AC%E5%AD%98%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</url>
+      <link href="/article/Docker%E9%95%9C%E5%83%8F%E8%BD%AC%E5%AD%98%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
+      <url>/article/Docker%E9%95%9C%E5%83%8F%E8%BD%AC%E5%AD%98%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</url>
       
         <content type="html"><![CDATA[<h2 id="什么是-Docker-Images-Pusher-？"><a href="#什么是-Docker-Images-Pusher-？" class="headerlink" title="什么是 Docker Images Pusher ？"></a>什么是 Docker Images Pusher ？</h2><p>:::info{title&#x3D;”相关信息”}<br>Docker Images Pusher 是一个 Docker 镜像转存工具。使用 Github Action 将国外的 Docker 镜像转存到阿里云私有仓库，供国内服务器使用，免费易用。<br>:::</p><p>:::note{title&#x3D;”功能特点”}</p><ul><li>支持 DockerHub, gcr.io, k8s.io, ghcr.io 等任意仓库；</li><li>支持最大 40GB 的大型镜像</li><li>使用阿里云的官方线路，速度快</li></ul><p>官方提供了视频教程：<a href="https://www.bilibili.com/video/BV1Zn4y19743/">https://www.bilibili.com/video/BV1Zn4y19743/</a><br>本方案不需要域名，速度也快。<br>:::</p><span id="more"></span><h2 id="配置阿里云"><a href="#配置阿里云" class="headerlink" title="配置阿里云"></a>配置阿里云</h2><p>登录阿里云容器镜像服务，地址：<a href="https://cr.console.aliyun.com/">https://cr.console.aliyun.com</a></p><p><img src="https://cjlong.synology.me:7965/i/a19beeaf-f0a6-47db-8fbf-c75ce1933b8a.jpg" alt="image"></p><p>创建 <code>个人实例</code></p><p><img src="https://cjlong.synology.me:7965/i/efe55f1b-775e-47de-b6a5-6f013e4e8195.jpg" alt="image"></p><ul><li>地域：选择离自己近的地方，不过国内应该差别不大</li><li>协议：需要勾选</li></ul><p><img src="https://cjlong.synology.me:7965/i/bb0de39f-ba2a-4a1c-8155-6e52c7d173a5.jpg" alt="image"></p><p>需要 设置<code>Registry</code>登录密码，这个值就是 <code>ALIYUN_REGISTRY_PASSWORD</code> 的值<br><img src="https://cjlong.synology.me:7965/i/d35a1f26-2903-4aa9-97aa-25e09f181dcd.jpg" alt="image"><br><img src="https://cjlong.synology.me:7965/i/45291253-fd5a-4a92-9cf3-5310dcc7b52b.jpg" alt="image"></p><p><code>ALIYUN_NAME_SPACE</code>：命名空间，例如 j_long<br><img src="https://cjlong.synology.me:7965/i/084439ab-5eec-426b-b7f2-833986084044.jpg" alt="image"></p><p>获取凭证</p><ul><li><code>ALIYUN_REGISTRY_USER</code>：用户名</li><li><code>ALIYUN_REGISTRY_PASSWORD</code>：密码</li><li><code>ALIYUN_REGISTRY</code>：仓库地址</li></ul><p><img src="https://cjlong.synology.me:7965/i/3b6e9149-e760-4984-add5-378c04237517.jpg" alt="image"></p><h2 id="Fork-代码"><a href="#Fork-代码" class="headerlink" title="Fork 代码"></a>Fork 代码</h2><ol><li>你要用 <code>Github</code> 的账号，并登录你的 <code>GitHub</code> 账号</li><li>打开 <code>Docker Images Pusher</code> 项目的地址：<a href="https://github.com/tech-shrimp/docker_image_pusher">https://github.com/tech-shrimp/docker_image_pusher</a></li><li><code>Fork</code> 该项目  <code>Create a new fork</code><br><img src="https://cjlong.synology.me:7965/i/19657132-dec2-4e7a-b0f1-1f0a2b42acf2.jpg" alt="image"></li></ol><p><code>fork</code> 成功后<br><img src="https://cjlong.synology.me:7965/i/4880c92b-f34d-47b4-9780-20549cc8a588.jpg" alt="image"></p><h2 id="配置-Github-Action"><a href="#配置-Github-Action" class="headerlink" title="配置 Github Action"></a>配置 Github Action</h2><p><code>Settings</code> –&gt;<code> Secrets and variables</code> –&gt; <code>New repository secret</code><br>填入第一步配置阿里云时获取的环境变量</p><ul><li><code>Name</code>：填入环境变量名；</li><li><code>Secret</code>：填入环境变量值；<br><img src="https://cjlong.synology.me:7965/i/62e83dff-d70f-48a1-b56a-bfe7cff3997a.jpg" alt="image"></li></ul><p>依次添加 <code>4</code> 个环境变量</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- ALIYUN_NAME_SPACE</span><br><span class="line">- ALIYUN_REGISTRY</span><br><span class="line">- ALIYUN_REGISTRY_USER</span><br><span class="line">- ALIYUN_REGISTRY_PASSWORD</span><br></pre></td></tr></table></figure><p><img src="https://cjlong.synology.me:7965/i/205d1843-0086-4598-9e63-658ab49b9ef3.jpg" alt="image"></p><p>还需要启用 <code>Actions</code><br><img src="https://cjlong.synology.me:7965/i/d4d6de90-1648-4a89-a922-2389138fe981.jpg" alt="image"></p><h2 id="添加镜像"><a href="#添加镜像" class="headerlink" title="添加镜像"></a>添加镜像</h2><p>修改 <code>images.txt</code> 文件，替换成你想要转存的 <code>docker</code> 镜像</p><ul><li>可以加 <code>tag</code>，也可以不加 （默认为 <code>latest</code>）；</li><li>可添加 <code>--platform=xxxxx</code> 的参数指定镜像架构；</li><li>可使用 <code>k8s.gcr.io/kube-state-metrics/kube-state-metrics</code> 格式指定私库；</li><li>可使用  <code>#</code> 开头作为注释</li></ul><p>按需要进行修改  </p><p><img src="https://cjlong.synology.me:7965/i/1ffba06e-587f-4dbe-a80c-9f16d814fab8.jpg" alt="image"><br><img src="https://cjlong.synology.me:7965/i/d5d62b8a-3543-434f-85f5-b8256edde748.jpg" alt="image"><br><img src="https://cjlong.synology.me:7965/i/e5d87c02-6044-4d48-95c9-d8e1b03b8ade.jpg" alt="image"></p><p>文件提交后，自动进入 <code>Github Action</code> 构建</p><p><img src="https://cjlong.synology.me:7965/i/f4443ea7-4d6c-4066-92f6-ad8caa231b0c.jpg" alt="image"></p><p>执行过程<br><img src="https://cjlong.synology.me:7965/i/be217461-90b2-4c08-bcdd-50c436b7eb91.jpg" alt="image"></p><p>执行完成<br><img src="https://cjlong.synology.me:7965/i/ff793d24-3c85-4d93-85c9-f160c937a1f0.jpg" alt="image"></p><h2 id="定时执行"><a href="#定时执行" class="headerlink" title="定时执行"></a>定时执行</h2><p>如果希望定时拉取镜像，需修改 <code>/.github/workflows/docker.yaml</code> 文件，添加 <code>schedule</code> 即可定时执行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此处 cron 使用 UTC 时区</span><br></pre></td></tr></table></figure><p><img src="https://cjlong.synology.me:7965/i/5eb712c8-2fac-46ab-b659-7403e4f6aadd.jpg" alt="image"></p><h2 id="使用镜像"><a href="#使用镜像" class="headerlink" title="使用镜像"></a>使用镜像</h2><p>回到阿里云的镜像仓库，会看到转存后的镜像列表<br><img src="https://cjlong.synology.me:7965/i/d42d6ce3-625c-48ed-8bb5-a79cac9dc53b.jpg" alt="image"><br>进入详情页面，会有详细的操作指南<br><img src="https://cjlong.synology.me:7965/i/9cbcb71f-1bea-430d-9e3c-65f875acafcc.jpg" alt="image"></p><p>下面是一个示例</p><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录阿里云镜像仓库</span></span><br><span class="line">docker login --username=你的阿里云账号 registry.cn-hangzhou.personal.cr.aliyuncs.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从阿里云镜像仓库拉取镜像</span></span><br><span class="line">docker pull registry.cn-hangzhou.personal.cr.aliyuncs.com/命名空间/镜像仓库名称:镜像版本号</span><br></pre></td></tr></table></figure><p>第一次需要登录验证，密码就是 <code>ALIYUN_REGISTRY_PASSWORD</code> 的值</p><div class="video-container">[up主专用，视频内嵌代码贴在这]</div><style>.video-container {    position: relative;    width: 100%;    padding-top: 56.25%; /* 16:9 aspect ratio (height/width = 9/16 * 100%) */}.video-container iframe {    position: absolute;    top: 0;    left: 0;    width: 100%;    height: 100%;}</style>]]></content>
       
@@ -34,8 +34,8 @@
     
     <entry>
       <title>伊索寓言之关于狐狸思维导图</title>
-      <link href="/2024/11/24/%E4%BC%8A%E7%B4%A2%E5%AF%93%E8%A8%80%E4%B9%8B%E5%85%B3%E4%BA%8E%E7%8B%90%E7%8B%B8%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
-      <url>/2024/11/24/%E4%BC%8A%E7%B4%A2%E5%AF%93%E8%A8%80%E4%B9%8B%E5%85%B3%E4%BA%8E%E7%8B%90%E7%8B%B8%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</url>
+      <link href="/article/%E4%BC%8A%E7%B4%A2%E5%AF%93%E8%A8%80%E4%B9%8B%E5%85%B3%E4%BA%8E%E7%8B%90%E7%8B%B8%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
+      <url>/article/%E4%BC%8A%E7%B4%A2%E5%AF%93%E8%A8%80%E4%B9%8B%E5%85%B3%E4%BA%8E%E7%8B%90%E7%8B%B8%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</url>
       
         <content type="html"><![CDATA[<h1 id="伊索寓言中关于狐狸"><a href="#伊索寓言中关于狐狸" class="headerlink" title="伊索寓言中关于狐狸"></a>伊索寓言中关于狐狸</h1><ul><li>狐狸和狗对歌</li><li>农夫和狐狸</li><li>狐狸的骗局</li><li>蝉和狐狸</li><li>吃不到葡萄就说葡萄酸</li></ul><p><img src="https://cjlong.synology.me:7965/i/a2b7ee84-5acf-4bf7-884c-af96a39c2c8f.jpg" alt="image"></p>]]></content>
       
@@ -67,8 +67,8 @@
     
     <entry>
       <title>过年</title>
-      <link href="/2024/11/24/%E8%BF%87%E5%B9%B4/"/>
-      <url>/2024/11/24/%E8%BF%87%E5%B9%B4/</url>
+      <link href="/article/%E8%BF%87%E5%B9%B4/"/>
+      <url>/article/%E8%BF%87%E5%B9%B4/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -80,8 +80,8 @@
     
     <entry>
       <title>啄木鸟开店</title>
-      <link href="/2024/11/23/%E5%95%84%E6%9C%A8%E9%B8%9F%E5%BC%80%E5%BA%97/"/>
-      <url>/2024/11/23/%E5%95%84%E6%9C%A8%E9%B8%9F%E5%BC%80%E5%BA%97/</url>
+      <link href="/article/%E5%95%84%E6%9C%A8%E9%B8%9F%E5%BC%80%E5%BA%97/"/>
+      <url>/article/%E5%95%84%E6%9C%A8%E9%B8%9F%E5%BC%80%E5%BA%97/</url>
       
         <content type="html"><![CDATA[<p>&emsp;&emsp;又是一个天寒地冻的冬天，今天的冬天比往年更加冷了，天冷得像冰块一样，仿佛能把空气都冻住。在这个冰天雪地的森林里，动物们都要被冻死了……<br>&emsp;&emsp;好在有一只神奇的啄木鸟在小河边开了一家森林超市。不管动物们要什么，啄木鸟都有卖，因为它在小河边种了一片神奇的玫瑰花，这些玫瑰花有一种魔法，只要啄木鸟自己拿玫瑰花对着一块普通的石头轻轻一甩，石头就会变成自己想要的东西。而且，只有心地善良的人才能拥有它。小动物们穿着啄木鸟变出的温暖衣物，在雪地里欢乐地打滚，再也不怕能把人冻成冰块的鬼天气了。国王知道这件事后，就拿了一些金子给狐狸小兵，让它去买过冬的物资。狐狸小兵望着那散散发光的金子，心中不禁生出一丝贪婪，暗自思量：如此珍贵之物何不悄悄纳入囊中？我且冒充国王之名，谅那啄木鸟也不敢多问。即便我不付分文，谅他也只能乖乖奉上。后来它把“买”到的物资交给国王，结果变成了一堆石头，国王气得火冒三丈，大吼：“我给你那么多金子，你敢用石头欺骗我！”说完便拿起大石头把狐狸砸死了。原来不善良的人拿了之后一会儿会变成原样。<br>&emsp;&emsp;从此以后这片森林里的小动物越来越善良了，因为不善良的小动物生存不下去的。</p>]]></content>
       
@@ -105,8 +105,8 @@
     
     <entry>
       <title>小雪</title>
-      <link href="/2024/11/23/%E5%B0%8F%E9%9B%AA/"/>
-      <url>/2024/11/23/%E5%B0%8F%E9%9B%AA/</url>
+      <link href="/article/%E5%B0%8F%E9%9B%AA/"/>
+      <url>/article/%E5%B0%8F%E9%9B%AA/</url>
       
         <content type="html"><![CDATA[<h1 id="这是一片新的文章"><a href="#这是一片新的文章" class="headerlink" title="这是一片新的文章"></a>这是一片新的文章</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p><img src="https://cjlong.synology.me:7965/i/45c516c1-4e33-41e3-b8a3-91c7a26908b0.jpg" alt="image"></p><style>.video-container {    position: relative;    width: 100%;    padding-top: 56.25%; /* 16:9 aspect ratio (height/width = 9/16 * 100%) */}.video-container iframe {    position: absolute;    top: 0;    left: 0;    width: 100%;    height: 100%;}</style>]]></content>
       
@@ -130,8 +130,8 @@
     
     <entry>
       <title>这是另一篇新的博文2024-11-21</title>
-      <link href="/2024/11/21/%E8%BF%99%E6%98%AF%E5%8F%A6%E4%B8%80%E7%AF%87%E6%96%B0%E7%9A%84%E5%8D%9A%E6%96%872024-11-21/"/>
-      <url>/2024/11/21/%E8%BF%99%E6%98%AF%E5%8F%A6%E4%B8%80%E7%AF%87%E6%96%B0%E7%9A%84%E5%8D%9A%E6%96%872024-11-21/</url>
+      <link href="/article/%E8%BF%99%E6%98%AF%E5%8F%A6%E4%B8%80%E7%AF%87%E6%96%B0%E7%9A%84%E5%8D%9A%E6%96%872024-11-21/"/>
+      <url>/article/%E8%BF%99%E6%98%AF%E5%8F%A6%E4%B8%80%E7%AF%87%E6%96%B0%E7%9A%84%E5%8D%9A%E6%96%872024-11-21/</url>
       
         <content type="html"><![CDATA[<div class="video-container"><iframe height=498 width=510 src='https://player.youku.com/embed/XMzgzMTM0Nzk2' frameborder=0 'allowfullscreen'></iframe></div>]]></content>
       

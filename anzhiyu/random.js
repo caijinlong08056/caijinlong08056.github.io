@@ -1,4 +1,4 @@
-var posts=["article/伊索寓言之关于狐狸思维导图/","article/安装ChatGPTWindows客户端/","article/科技节/","article/Docker镜像转存到阿里云私有仓库/","article/啄木鸟开店/"];function toRandomPost(){
+var posts=["p/29399.html","p/64416.html","p/46309.html","p/58697.html","p/3845.html"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };var friend_link_list=[];
     var refreshNum = 1;

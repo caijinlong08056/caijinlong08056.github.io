@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>表格</title>
+      <link href="/p/938d.html"/>
+      <url>/p/938d.html</url>
+      
+        <content type="html"><![CDATA[<div class="markdown-table"><table><thead><tr><th>姓名</th><th>年龄</th><th>职业</th></tr></thead><tbody><tr><td>张三</td><td>28</td><td>程序员</td></tr><tr><td>李四</td><td>32</td><td>设计师</td></tr><tr><td>王五</td><td>25</td><td>产品经理</td></tr></tbody></table></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 语法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Markdown </tag>
+            
+            <tag> 表格 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>安装 ChatGPT Windows客户端</title>
       <link href="/p/64416.html"/>
       <url>/p/64416.html</url>
@@ -107,11 +134,11 @@
       
         <tags>
             
+            <tag> 动物 </tag>
+            
             <tag> 手抄报 </tag>
             
             <tag> 思维导图 </tag>
-            
-            <tag> 动物 </tag>
             
             <tag> 狐狸 </tag>
             

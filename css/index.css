@@ -5329,7 +5329,7 @@ body[data-type='about'] #web_bg {
   filter: drop-shadow(0 -500px 0 var(--loadingbar-prospect-color));
   width: 500px;
   height: 62.5px;
-  background: url("https://yuanshen.site/imgs/loading-bar.png") no-repeat left 100%;
+  background: url("https://cjlong.synology.me:7965/i/43f67bb2-66d9-4f08-94a6-012403f49425.webp") no-repeat left 100%;
   background-size: 500px 62.5px;
   background-position-x: 0;
 }
